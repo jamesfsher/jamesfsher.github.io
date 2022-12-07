@@ -4,12 +4,14 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
 import os
+import jinja2
+import config
 
 app = Flask(__name__)
 
 # Client ID and secret from user app
-Client_ID = '5258f60a3abb407e9d460482ca93ac26'
-Client_Secret = 'b26a4e7e590e4afba9f0e0f30e1628fe'
+Client_ID = config.Client_ID
+Client_Secret = config.Client_Secret
 
 # Set app secret key to random value
 app.config['SECRET_KEY'] = os.urandom(64)
@@ -44,7 +46,7 @@ def authorize():
     session[TOKEN_INFO] = token_info
     return redirect(url_for('getLibrary', _external=True))
 
-@app.route('/getLibrary', methods=['GET', 'POST'])
+@app.route('/getLibrary')
 def getLibrary():
     try:
         token_info = get_token()
@@ -57,7 +59,7 @@ def getLibrary():
     playlists = {}
     for entry in results['items']:
         playlists[entry["name"]] = entry["id"]
-    return render_template("getLibrary.html")
+    return render_template("getLibrary.html", playlists=playlists)
 
 @app.route('/getTracks', methods=['GET', 'POST'])
 def getTracks():
