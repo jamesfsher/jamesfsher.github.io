@@ -64,7 +64,16 @@ def getLibrary():
 @app.route('/getTracks', methods=['GET', 'POST'])
 def getTracks():
     if request.method == "POST":
-        return "do something"
+        try:
+            token_info = get_token()
+        except:
+            # If user reaches page via GET and isn't signed in, redirects to index
+            print("User Not Logged In")
+            redirect(url_for('index', _external=True))
+        sp = spotipy.Spotify(auth = token_info['access_token'])
+        playlist = request.form.get("playlist")
+        songs = sp.playlist_items(playlist)
+        return songs
     else:
         return render_template("getTracks.html")
 

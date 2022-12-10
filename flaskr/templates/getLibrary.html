@@ -4,9 +4,10 @@
       
     <h1>Select a Playlist</h1>
     <p>These are the playlists found for you account. Please select one to analyze</p>
-
+    
     <form action="/getTracks" method="POST">
         <select name="playlist" id="playlist">
+            <option disabled selected>Select Playlist</option>
             {% for playlist in playlists %}
             <option value="{{ playlist }}">{{ playlist }}</option>
             {% endfor %}
