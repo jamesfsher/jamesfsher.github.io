@@ -72,8 +72,15 @@ def getTracks():
             redirect(url_for('index', _external=True))
         sp = spotipy.Spotify(auth = token_info['access_token'])
         playlist = request.form.get("playlist")
-        songs = sp.playlist_items(playlist)
-        return songs
+        results = sp.playlist_items(playlist)
+        tracks = {}
+        for entry in results['items']:
+            tracks[entry['track']['name']] = entry['track']['id']
+        track_ids = []
+        for entry in results['items']:
+            track_ids.append(entry['track']['id'])
+        features = sp.audio_features(track_ids)
+        return features
     else:
         return render_template("getTracks.html")
 
