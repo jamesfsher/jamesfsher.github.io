@@ -80,7 +80,7 @@ def getTracks():
         for entry in results['items']:
             track_ids.append(entry['track']['id'])
         features = sp.audio_features(track_ids)
-        return features
+        return track_ids
     else:
         return render_template("getTracks.html")
 
