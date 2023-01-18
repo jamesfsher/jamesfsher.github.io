@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>Whoops</h1>
+<p>Something went wrong. It's probably my fault. Click below to redirect to homepage</p>
+<form action="/getLibrary" method="GET">
+    <input type="submit" value="Go to homepage" name="submit" id="submit">
+</form>
+
+{% endblock %}

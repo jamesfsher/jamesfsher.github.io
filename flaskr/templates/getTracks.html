@@ -1,7 +1,64 @@
 {% extends "layout.html" %}
 
 {% block body %}
-      text
+<h1>{{ playlist }} Playlist Analyzed</h1>
+<div class="mb-3">
+      <h2>Most common genres in this playlist</h2>
+      <table class="table table-hover table-sm">
+            <thead>
+                  <tr>
+                        <th>Genre</th>
+                        <th>Number of Occurances</th>
+                  </tr>
+            </thead>
+            <tbody>
+                  {% for key, value in genres_mostcommon %}
+                  <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                  </tr>
+                  {% endfor %}
+            </tbody>
+      </table>
+</div>
+<h2>Least common genres in this playlist</h2>
+<table class="table table-hover table-sm">
+      <thead>
+            <tr>
+                  <th>Genre</th>
+                  <th>Number of Occurances</th>
+            </tr>
+      </thead>
+      <tbody>
+            {% for key, value in genres_leastcommon %}
+            <tr>
+                  <td>{{ key }}</td>
+                  <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+      </tbody>
+</table>
 
+<h2>Tracks on this playlist</h2>
+<table class="table table-hover">
+      <thead>
+            <tr>
+                  <th>Track</th>
+                  <th>Artist</th>
+                  <th>Album</th>
+                  <th>Popularity (Between 1-100)</th>
+            </tr>
+      </thead>
+      <tbody>
+            {% for dict_item in track_info %}
+                  <tr>
+                        <td>{{ dict_item['track name'] }}</td>
+                        <td>{{ dict_item['artist name'] }}</td>
+                        <td>{{ dict_item['album name'] }}</td>
+                        <td>{{ dict_item['track popularity'] }}</td>
+                        </tr>
+            {% endfor %}
+      </tbody>
+</table>
 
 {% endblock %}
