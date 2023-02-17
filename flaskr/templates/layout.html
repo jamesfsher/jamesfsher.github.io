@@ -6,39 +6,38 @@
         <meta name="viewport" content="initial-scale=1, width=device-width" charset="utf-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <title>Spotify Playlist Analyzer</title>
     </head>
     <body>
-        <!--  -->
-        <!-- TODO: use JS to detect current page and mark as active --> 
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link" id="home" href="/homepage">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="playlistanalyzer" href="/getLibrary">Playlist Analyzer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="toptracks" href="/topTracks">Your Top Tracks</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="dwarchiver" href="/dwArchiver">Discover Weekly Archiver</a>
-            </li>
-          </ul>
-          <script>
-            // Store all elements with class of nav-link to a list
-            let navs = document.querySelectorAll('.nav-link');
-            // Get length of list
-            let count = navs.length;
-            console.log(navs);
-            // Change nav link to "active" if url matches href
-            for (let i = 0; i < count; i++) {
-              if (window.location.href.indexOf(navs[i].href) > -1) {
-                navs[i].classList.add('active');
-                console.log(navs[i].href);
-              }
-            }
-          </script>
-        {% block body %}{% endblock %}
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" id="home" href="/homepage">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="playlistanalyzer" href="/getLibrary">Playlist Analyzer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="toptracks" href="/topTracks">Your Top Tracks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="dwarchiver" href="/dwArchiver">Discover Weekly Archiver</a>
+        </li>
+      </ul>
+      <script>
+        // Store all elements with class of nav-link to a list
+        let navs = document.querySelectorAll('.nav-link');
+        // Get length of list
+        let count = navs.length;
+        console.log(navs);
+        // Change nav link to "active" if url matches href
+        for (let i = 0; i < count; i++) {
+          if (window.location.href.indexOf(navs[i].href) > -1) {
+            navs[i].classList.add('active');
+            console.log(navs[i].href);
+          }
+        }
+      </script>
+      {% block body %}{% endblock %}
     </body>
 </html>

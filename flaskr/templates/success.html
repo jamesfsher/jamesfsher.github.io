@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div>
+    <h1>DW Archived Sucessfully.</h1>
+    <p>Check your Spotify Account for the archived playlist</p>
+    <form action="/homepage" method="GET">
+        <input type="submit" value="Go to homepage" name="submit" id="submit">
+    </form>
+</div>
+{% endblock %}

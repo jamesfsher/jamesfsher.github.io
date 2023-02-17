@@ -1,7 +1,155 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div>
-    <h1>TODO create a top tracks viewer</h1>
+
+<!-- Radio buttons here -->
+
+<input type="radio" id="tracks" name="type" class="type" value="tracks" checked="checked">
+<label for="tracks">Top Tracks</label>
+<input type="radio" id="artists" name="type" class="type" value="artists">
+<label for="artists">Top Artists</label>
+<br>
+<input type="radio" id="short" name="time" value="short" checked="checked">
+<label for="short">Past Month</label>
+<input type="radio" id="medium" name="time" value="medium">
+<label for="medium">Past 6 Months</label>
+<input type="radio" id="long" name="time" value="long">
+<label for="long">All Time</label>
+
+
+<div class="tab" id="tracksshort">
+    <h2>Top Songs From the Last Month</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Track</th>
+                <th>Artist</th>
+                <th>Album</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dict_item in top_track_st%}
+            <tr>
+                <td>{{ dict_item['track name'] }}</td>
+                <td>{{ dict_item['artist name'] }}</td>
+                <td>{{ dict_item['album name'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
+
+<div class="tab" id="tracksmedium">
+    <h2>Top Songs From the Past 6 Months</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Track</th>
+                <th>Artist</th>
+                <th>Album</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dict_item in top_track_mt%}
+            <tr>
+                <td>{{ dict_item['track name'] }}</td>
+                <td>{{ dict_item['artist name'] }}</td>
+                <td>{{ dict_item['album name'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="tab" id="trackslong">
+    <h2>Top Songs From All Time</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Track</th>
+                <th>Artist</th>
+                <th>Album</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dict_item in top_track_lt%}
+            <tr>
+                <td>{{ dict_item['track name'] }}</td>
+                <td>{{ dict_item['artist name'] }}</td>
+                <td>{{ dict_item['album name'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="tab" id="artistslong">
+    <h2>Top Artists from All Time</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Artist Name</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for elem in top_artist_lt%}
+            <tr>
+                <td>{{ elem }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<script>
+
+    // Default radio values when page loads
+    var default_type = document.querySelector('input[name=type]:checked').value;
+    var default_time = document.querySelector('input[name=time]:checked').value;
+    var default_selection = '#' + default_type + default_time;
+    // Hide all divs with 'tab' class
+    $('div.tab').hide();
+    // Show the div that has an id that matches the default selected radio forms
+    $(default_selection).show();
+    // Click funtion on the 'type' radio
+   $(document).ready(function() {
+        $('input[type=radio][name=type]').click(function() {
+            // Clicked radio form value
+            var test = $(this).val();
+            // Reads the currently checked 'time' radio value
+            var test2 = $('input[name=time]:checked').val();
+            // creates a combinded value to compare against the 'tab' class div id
+            var target = "#" + test + test2
+            // hides all divs with 'tab' class
+            $("div.tab").hide();
+            // shows the tab div with target value
+            $(target).show();
+        });
+    });
+    // Click function on 'time' radio form. Does the same as the above function but for 'time' as 
+    // clicked value and 'type' as read only value
+    $(document).ready(function() {
+        $('input[type=radio][name=time]').click(function() {
+            var test = $(this).val();
+            var test2 = $('input[name=type]:checked').val();
+            var target = "#" + test2 + test
+            $("div.tab").hide();
+            $(target).show();
+        });
+    });
+
+    // check if jquery loaded (lol)
+        //     window.onload = function() {
+        //     if (window.jQuery) {  
+        //         // jQuery is loaded  
+        //         alert("Yeah!");
+        //     } else {
+        //         // jQuery is not loaded
+        //         alert("Doesn't Work");
+        //     }
+        // }
+</script>
 {% endblock %}

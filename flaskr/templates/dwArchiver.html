@@ -1,7 +1,12 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div>
-    <h1>TODO create a dw archiver</h1>
+<div class="mb-3">
+    <h1>Archive Your Current Discover Weekly Playlist</h1>
+    <p>This action will create a new playlist with you current Discover Weekly Playlist.</p>
+    
+    <form action="/dwArchiver" method="POST">
+        <input type="submit" value="Archive!">
+    </form>
 </div>
 {% endblock %}
